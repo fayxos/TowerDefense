@@ -1,5 +1,13 @@
 package game.Objects;
 
-public class Obstacle extends Building {
+public abstract class Obstacle extends Structure {
+
+	int removingCost;
+	
+	boolean isRemovable;
+	
+	protected Obstacle() {
+		super();
+	}
 
 }
