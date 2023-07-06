@@ -14,6 +14,6 @@ public abstract class Structure {
 		ID = IDCounter++;
 	}
 	
-	abstract public void paint(Graphics graphics);
+	abstract public void draw(Graphics graphics);
 	
 }
