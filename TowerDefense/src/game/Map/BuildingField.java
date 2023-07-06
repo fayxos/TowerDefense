@@ -5,9 +5,10 @@ import java.awt.Graphics;
 import game.Main.GameFrame;
 import game.Objects.Building;
 import game.Objects.Obstacle;
+import game.Objects.Structure;
 
 public class BuildingField extends Field {
-	Building building;
+	Structure structure;
 	final String imagePath = "assets/Sprites/Environment tiles/ground.png";
 	
 	public BuildingField() {
@@ -23,8 +24,8 @@ public class BuildingField extends Field {
 
 		graphics.drawImage(image, x-xOffset, y-yOffset-move, null);
 		
-		if(building != null) {
-			//building.draw(graphics, canvas)
+		if(structure != null) {
+			structure.draw(graphics);
 		} 
 				
 	}
