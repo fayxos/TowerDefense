@@ -10,12 +10,8 @@ public class ArcherTower extends ActiveBuilding {
 	public ArcherTower(int x, int y) {
 		super();
 		
-		sprites
-		
 		xOffset = 0;
 		yOffset = 0;
-		
-		visibleSprite = 
 		
 		attackRange = 0;
 		attackSpeed = 0;

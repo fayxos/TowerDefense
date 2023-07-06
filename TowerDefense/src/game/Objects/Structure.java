@@ -1,5 +1,6 @@
 package game.Objects;
 
+import java.awt.Graphics;
 import java.awt.Image;
 
 public abstract class Structure {
@@ -9,14 +10,10 @@ public abstract class Structure {
 	
 	int x,y, xOffset, yOffset;
 	
-	Image visibleSprite;
-	
 	protected Structure() {
 		ID = IDCounter++;
 	}
 	
-	public void paint() {
-		
-	}
-
+	abstract public void paint(Graphics graphics);
+	
 }
