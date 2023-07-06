@@ -16,7 +16,7 @@ public abstract class Obstacle extends Structure {
 	}
 	
 	@Override
-	public void paint(Graphics graphics) {
+	public void draw(Graphics graphics) {
 		graphics.drawImage(visibleSprite, x-xOffset, y-yOffset, null);
 	}
 
