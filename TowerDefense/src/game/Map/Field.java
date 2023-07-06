@@ -27,11 +27,6 @@ public class Field {
 	}
 	
 	public void draw(Graphics graphics) {
-		int move = 0;
-		if(Field.HighlightedID == ID) {
-			move = 5;
-		}
-		
 		graphics.drawImage(image, x-xOffset, y-yOffset-move, null);
 	}
 	
