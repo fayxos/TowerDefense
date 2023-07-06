@@ -3,6 +3,9 @@ import java.awt.*;
 
 
 public class Field {
+	private static int IDCounter = 0;
+	public static int HighlightedID = -1;
+	public int ID;
 	int x;
 	int y;
 	public static final int xOffset = 50;
@@ -12,6 +15,7 @@ public class Field {
 	Image image;
 		
 	public void place(int x, int y) {
+		this.ID = IDCounter++;
 		this.x = x;
 		this.y = y;
 	}
@@ -23,7 +27,12 @@ public class Field {
 	}
 	
 	public void draw(Graphics graphics) {
-		graphics.drawImage(image, x-xOffset, y-yOffset, null);
+		int move = 0;
+		if(Field.HighlightedID == ID) {
+			move = 5;
+		}
+		
+		graphics.drawImage(image, x-xOffset, y-yOffset-move, null);
 	}
 	
 }
