@@ -16,7 +16,12 @@ public class BuildingField extends Field {
 	
 	@Override
 	public void draw(Graphics graphics) {
-		super.draw(graphics);
+		int move = 0;
+		if(Field.HighlightedID == ID) {
+			move = 5;
+		}
+
+		graphics.drawImage(image, x-xOffset, y-yOffset-move, null);
 		
 		if(building != null) {
 			//building.draw(graphics, canvas)
