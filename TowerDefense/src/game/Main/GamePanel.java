@@ -7,17 +7,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import game.Map.Field;
 import game.Map.Map;
 import game.Objects.Enemy;
 
-class GamePanel extends JPanel implements ActionListener, KeyListener {
+class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener {
     private static final long serialVersionUID = 1L;
     private static final Dimension PANEL_SIZE = new Dimension(1500, 900);
-    private static final int REFRESH_RATE = 10;
+    private static final int REFRESH_RATE = 500;
 
     private Timer timer = new Timer(REFRESH_RATE, this);
     
@@ -28,6 +31,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
 
     public GamePanel() {
         addKeyListener(this);
+        addMouseMotionListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         setBackground(Color.GREEN);
@@ -48,9 +52,21 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     }
 
     // Timer
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {    	
         repaint();
     }
+    
+    public void mouseMoved(MouseEvent e) {
+       Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
+       if(selectedField == null) Field.HighlightedID = -1;
+       else Field.HighlightedID = selectedField.ID;
+       
+       System.out.println(Field.HighlightedID);
+    }
+
+    public void mouseDragged(MouseEvent e) {
+	   
+	}
 
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
