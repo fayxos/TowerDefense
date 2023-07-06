@@ -8,7 +8,7 @@ public abstract class Obstacle extends Structure {
 	int removingCost;
 	
 	boolean isRemovable;
-	
+	//teste
 	Image visibleSprite;
 	
 	protected Obstacle() {
