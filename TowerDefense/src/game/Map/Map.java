@@ -91,4 +91,36 @@ public class Map {
 		}
 	}
 	
+	public Field getFieldFromPosition(int x, int y) {
+		Field nearestField = null;
+		double smallestDistance = 1000;
+		
+		for(int row=0; row<fields.length; row++) {
+			for(int column=0; column<fields[row].length; column++) {
+				if (fields[row][column] == null) return null;
+				double distanceToField = calculateDistanceToField(x, y, fields[row][column]);
+				if(distanceToField <= Field.xOffset) {
+					if(nearestField == null) {
+						nearestField = fields[row][column];
+						smallestDistance = distanceToField;
+					} 
+					else if(distanceToField < smallestDistance) {
+						nearestField = fields[row][column];
+						smallestDistance = distanceToField;
+					}
+				}
+			}
+		}
+		
+		return nearestField;
+	}
+	
+	private double calculateDistanceToField(int x, int y, Field field) {
+		int xVec = field.x - x;
+		int yVec = field.y - y;
+		
+		double distance = Math.sqrt(Math.pow(xVec, 2) + Math.pow(yVec, 2));
+		
+		return distance;
+	}
 }
