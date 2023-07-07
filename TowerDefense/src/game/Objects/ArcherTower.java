@@ -11,9 +11,6 @@ public class ArcherTower extends ActiveBuilding {
 	public ArcherTower(int x, int y) {
 		super();
 		
-		xOffset = 0;
-		yOffset = 0;
-		
 		attackRange = 0;
 		attackSpeed = 0;
 		attackDamage = 0;
