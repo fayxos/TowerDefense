@@ -13,9 +13,12 @@ public class Field {
 	static final int width = 103;
 	static final int height = 100;
 	Image image;
+	
+	public Field() {
+		this.ID = IDCounter++;
+	}
 		
 	public void place(int x, int y) {
-		this.ID = IDCounter++;
 		this.x = x;
 		this.y = y;
 	}
@@ -30,4 +33,12 @@ public class Field {
 		graphics.drawImage(image, x-xOffset, y-yOffset, null);
 	}
 	
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
 }

@@ -3,7 +3,7 @@ package game.Map;
 import java.awt.Graphics;
 
 public class Map {
-	Field[][] fields = new Field[7][7];
+	public Field[][] fields = new Field[7][7];
 	int xStart;
 	int yStart;
 	
@@ -115,7 +115,7 @@ public class Map {
 		return nearestField;
 	}
 	
-	private double calculateDistanceToField(int x, int y, Field field) {
+	public static double calculateDistanceToField(int x, int y, Field field) {
 		int xVec = field.x - x;
 		int yVec = field.y - y;
 		
