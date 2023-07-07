@@ -13,9 +13,9 @@ public enum EnvironmentFieldType {
 	TOP_LEFT_TO_BOTTOM_RIGHT_PATH("assets/Sprites/River tiles/river(10).png"),
 	BOTTOM_LEFT_TO_TOP_RIGHT_PATH("assets/Sprites/River tiles/river(11).png");
 	
-	public final String label;
+	public final String path;
 
-    private EnvironmentFieldType(String label) {
-        this.label = label;
+    private EnvironmentFieldType(String path) {
+        this.path = path;
     }
 }

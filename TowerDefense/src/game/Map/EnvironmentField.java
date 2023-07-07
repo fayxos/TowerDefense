@@ -5,7 +5,7 @@ public class EnvironmentField extends Field {
 	
 	public EnvironmentField(EnvironmentFieldType type) {
 		this.type = type;
-		loadImage(type.label);
+		loadImage(type.path);
 	}
 
 }

@@ -26,9 +26,9 @@ public enum PathFieldType {
 	BOTTOM_LEFT_TO_TOP_RIGHT_BRIDGE_END("assets/Sprites/Road tiles/roads on water/road(7).png"),
 	TOP_LEFT_TO_BOTTOM_RIGHT_BRIDGE_END("assets/Sprites/Road tiles/roads on water/road(8).png");
 	
-	public final String label;
+	public final String path;
 
-    private PathFieldType(String label) {
-        this.label = label;
+    private PathFieldType(String path) {
+        this.path = path;
     }
 }

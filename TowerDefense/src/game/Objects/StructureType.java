@@ -1,6 +1,6 @@
 package game.Objects;
 
-public enum StructureSprites {
+public enum StructureType {
 	GREEN_TOWER_BOTTOM_1("/assets/Sprites/Tower tiles/Green tower/block(1).png"),
 	GREEN_TOWER_BOTTOM_2("/assets/Sprites/Tower tiles/Green tower/block(2).png"),
 	GREEN_TOWER_BOTTOM_3("/assets/Sprites/Tower tiles/Green tower/block(3).png"),
@@ -61,7 +61,7 @@ public enum StructureSprites {
 
 	public final String path;
 	
-	StructureSprites(String path) {
+	StructureType(String path) {
 		this.path = path;
 	}
 }

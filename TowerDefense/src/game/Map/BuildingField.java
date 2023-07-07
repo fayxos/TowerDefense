@@ -8,11 +8,20 @@ import game.Objects.Obstacle;
 import game.Objects.Structure;
 
 public class BuildingField extends Field {
-	Structure structure;
+	private Structure structure;
 	final String imagePath = "assets/Sprites/Environment tiles/ground.png";
 	
 	public BuildingField() {
 		loadImage(imagePath);
+	}
+	
+	public BuildingField(Structure structure) {
+		this();
+		this.structure = structure;
+	}
+	
+	public void setStructure(Structure structure) {
+		this.structure = structure;
 	}
 	
 	@Override
@@ -25,7 +34,7 @@ public class BuildingField extends Field {
 		graphics.drawImage(image, x-xOffset, y-yOffset-move, null);
 		
 		if(structure != null) {
-			structure.draw(graphics);
+			structure.draw(graphics, x, y);
 		} 
 				
 	}

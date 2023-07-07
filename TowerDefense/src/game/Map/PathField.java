@@ -5,6 +5,6 @@ public class PathField extends Field {
 	
 	public PathField(PathFieldType type) {
 		this.type = type;
-		loadImage(type.label);
+		loadImage(type.path);
 	}
 }
