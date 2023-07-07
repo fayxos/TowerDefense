@@ -1,5 +1,6 @@
 package game.Objects;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 
@@ -16,6 +17,12 @@ public class ArcherTower extends ActiveBuilding {
 		attackRange = 0;
 		attackSpeed = 0;
 		attackDamage = 0;
+		
+	}
+
+	@Override
+	public void draw(Graphics graphics) {
+		// TODO Auto-generated method stub
 		
 	}
 

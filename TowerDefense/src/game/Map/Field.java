@@ -27,7 +27,7 @@ public class Field {
 	}
 	
 	public void draw(Graphics graphics) {
-		graphics.drawImage(image, x-xOffset, y-yOffset-move, null);
+		graphics.drawImage(image, x-xOffset, y-yOffset, null);
 	}
 	
 }

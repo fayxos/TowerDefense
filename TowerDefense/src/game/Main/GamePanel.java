@@ -20,7 +20,7 @@ import game.Objects.Enemy;
 class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener {
     private static final long serialVersionUID = 1L;
     private static final Dimension PANEL_SIZE = new Dimension(1500, 900);
-    private static final int REFRESH_RATE = 500;
+    private static final int REFRESH_RATE = 50;
 
     private Timer timer = new Timer(REFRESH_RATE, this);
     
@@ -60,8 +60,6 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
        Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
        if(selectedField == null) Field.HighlightedID = -1;
        else Field.HighlightedID = selectedField.ID;
-       
-       System.out.println(Field.HighlightedID);
     }
 
     public void mouseDragged(MouseEvent e) {
