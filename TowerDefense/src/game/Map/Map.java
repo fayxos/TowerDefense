@@ -2,6 +2,8 @@ package game.Map;
 
 import java.awt.Graphics;
 
+import game.Objects.*;
+
 public class Map {
 	public Field[][] fields = new Field[7][7];
 	int xStart;
@@ -14,7 +16,7 @@ public class Map {
 	}
 	
 	private void build() {
-		fields[0][0] = new BuildingField();
+		fields[0][0] = new BuildingField(new StoneS(StructureType.GREY_STONE_S));
 		fields[0][1] = new BuildingField();
 		fields[0][2] = new EnvironmentField(EnvironmentFieldType.BOTTOM_LEFT_TO_BOTTOM_RIGHT_CURVE);
 		fields[0][3] = new EnvironmentField(EnvironmentFieldType.BOTTOM_LEFT_TO_TOP_RIGHT_PATH);
