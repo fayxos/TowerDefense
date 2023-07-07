@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-public abstract class Building extends Structure {
+abstract public class Building extends Structure {
 	
 	Image bottomSprite, topSprite;
 	
