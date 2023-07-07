@@ -3,9 +3,9 @@ package game.Map;
 import java.awt.Graphics;
 
 import game.Main.GameFrame;
-import game.Objects.Building;
-import game.Objects.Obstacle;
-import game.Objects.Structure;
+import game.Structures.Building;
+import game.Structures.Obstacle;
+import game.Structures.Structure;
 
 public class BuildingField extends Field {
 	private Structure structure;

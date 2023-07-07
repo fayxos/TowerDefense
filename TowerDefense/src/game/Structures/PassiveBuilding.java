@@ -1,4 +1,4 @@
-package game.Objects;
+package game.Structures;
 
 public abstract class PassiveBuilding extends Building {
 

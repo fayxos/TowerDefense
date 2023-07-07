@@ -6,7 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class GameState {
-    static int lives = 10;
+    static int lives = 100;
     static int gold = 100;
     static boolean gameOver = false;
 
@@ -23,7 +23,7 @@ public class GameState {
     	goldImage = GameState.loadImage("assets/gold.png", 40, 40);
     	gameOverImage = GameState.loadImage("assets/game_over.png", GamePanel.PANEL_SIZE.height, GamePanel.PANEL_SIZE.height);
 
-    	lives = 10;
+    	lives = 100;
         gold = 100;
         gameOver = false;
     }

@@ -2,7 +2,7 @@ package game.Map;
 
 import java.awt.Graphics;
 
-import game.Objects.*;
+import game.Structures.*;
 
 public class Map {
 	public Field[][] fields = new Field[7][7];
@@ -16,20 +16,20 @@ public class Map {
 	}
 	
 	private void build() {
-		fields[0][0] = new BuildingField(new StoneS(StructureType.GREY_STONE_S));
-		fields[0][1] = new BuildingField();
+		fields[0][0] = new BuildingField(new Stone(StructureType.GREY_STONE_S));
+		fields[0][1] = new BuildingField(new Tree(StructureType.LAYERED_TREE_L));
 		fields[0][2] = new EnvironmentField(EnvironmentFieldType.BOTTOM_LEFT_TO_BOTTOM_RIGHT_CURVE);
 		fields[0][3] = new EnvironmentField(EnvironmentFieldType.BOTTOM_LEFT_TO_TOP_RIGHT_PATH);
 		fields[0][4] = new EnvironmentField(EnvironmentFieldType.BOTTOM_RIGHT_TO_TOP_RIGHT_CURVE);
 		fields[0][5] = new BuildingField();
 		fields[0][6] = new BuildingField();
 		
-		fields[1][0] = new BuildingField();
+		fields[1][0] = new BuildingField(new Stone(StructureType.BROWN_STONE_SL));
 		fields[1][1] = new BuildingField();
 		fields[1][2] = new EnvironmentField(EnvironmentFieldType.TOP_LEFT_TO_BOTTOM_RIGHT_PATH);
 		fields[1][3] = new PathField(PathFieldType.BOTTOM_RIGHT_TO_TOP_LEFT_END);
 		fields[1][4] = new EnvironmentField(EnvironmentFieldType.TOP_LEFT_TO_BOTTOM_RIGHT_PATH);
-		fields[1][5] = new BuildingField();
+		fields[1][5] = new BuildingField(new Tree(StructureType.STRAIGHT_TREE_S));
 		fields[1][6] = new BuildingField();
 		
 		fields[2][0] = new BuildingField();
@@ -38,7 +38,7 @@ public class Map {
 		fields[2][3] = new PathField(PathFieldType.TOP_LEFT_TO_BOTTOM_RIGHT_PATH);
 		fields[2][4] = new EnvironmentField(EnvironmentFieldType.TOP_LEFT_TO_BOTTOM_RIGHT_PATH);
 		fields[2][5] = new BuildingField();
-		fields[2][6] = new BuildingField();
+		fields[2][6] = new BuildingField(new Stone(StructureType.GREY_STONE_L));
 		
 		fields[3][0] = new PathField(PathFieldType.BOTTOM_LEFT_TO_TOP_RIGHT_END);
 		fields[3][1] = new PathField(PathFieldType.BOTTOM_LEFT_TO_TOP_RIGHT_PATH);
@@ -56,9 +56,9 @@ public class Map {
 		fields[4][5] = new PathField(PathFieldType.BOTTOM_RIGHT_TO_TOP_RIGHT_CURVE);
 		fields[4][6] = new BuildingField();
 		
-		fields[5][0] = new BuildingField();
+		fields[5][0] = new BuildingField(new Tree(StructureType.STRAIGHT_TREE_L));
 		fields[5][1] = new BuildingField();
-		fields[5][2] = new BuildingField();
+		fields[5][2] = new BuildingField(new Stone(StructureType.GREY_STONE_SLS));
 		fields[5][3] = new BuildingField();
 		fields[5][4] = new EnvironmentField(EnvironmentFieldType.TOP_LEFT_TO_BOTTOM_RIGHT_END);
 		fields[5][5] = new PathField(PathFieldType.TOP_LEFT_TO_BOTTOM_RIGHT_PATH);
@@ -68,7 +68,7 @@ public class Map {
 		fields[6][1] = new BuildingField();
 		fields[6][2] = new BuildingField();
 		fields[6][3] = new BuildingField();
-		fields[6][4] = new BuildingField();
+		fields[6][4] = new BuildingField(new Tree(StructureType.LAYERED_TREE_S));
 		fields[6][5] = new PathField(PathFieldType.TOP_LEFT_TO_BOTTOM_RIGHT_END);
 		fields[6][6] = new BuildingField();
 		

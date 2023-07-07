@@ -1,4 +1,4 @@
-package game.Objects;
+package Objects;
 
 import java.awt.Graphics;
 import java.awt.Image;

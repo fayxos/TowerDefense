@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import Objects.Enemy;
+import Objects.EnemyType;
 import game.Map.Field;
 import game.Map.Map;
-import game.Objects.Enemy;
-import game.Objects.EnemyType;
 
 class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener {
     private static final long serialVersionUID = 1L;
