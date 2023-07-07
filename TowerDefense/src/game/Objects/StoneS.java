@@ -3,15 +3,16 @@ package game.Objects;
 public class StoneS extends Obstacle{
 	
 	public StoneS() {
-		xOffset = 50;
-		yOffset = 30;
-		width = 100;
-		height = 100;
+		this(StructureType.GREY_STONE_S);
 	}
 	
 	public StoneS(StructureType type) {
 		super();
-		loadImage(type.path);
+		xOffset = 50;
+		yOffset = 30;
+		int width = 100;
+		int height = 100;
+		loadImage(type.path, width, height);
 	}
 
 }

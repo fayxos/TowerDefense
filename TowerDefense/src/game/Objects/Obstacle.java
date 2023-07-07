@@ -16,7 +16,7 @@ abstract public class Obstacle extends Structure {
 		super();
 	}
 	
-	public void loadImage(String imagePath) {
+	public void loadImage(String imagePath, int width, int height) {
 		Toolkit t = Toolkit.getDefaultToolkit();  
         Image i = t.getImage(imagePath); 
         sprite = i.getScaledInstance(width, height, Image.SCALE_SMOOTH);

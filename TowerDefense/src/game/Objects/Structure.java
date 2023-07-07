@@ -9,7 +9,6 @@ abstract public class Structure {
 	private static int IDCounter = 0;
 	final int ID;
 	
-	int width = 100, height = 100;
 	int xOffset, yOffset;
 	double scalingFactor = 1/11.6;
 	
