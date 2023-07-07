@@ -20,10 +20,4 @@ public class ArcherTower extends ActiveBuilding {
 		
 	}
 
-	@Override
-	public void draw(Graphics graphics) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
