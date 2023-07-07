@@ -8,10 +8,10 @@ public class StoneS extends Obstacle{
 	
 	public StoneS(StructureType type) {
 		super();
-		xOffset = 50;
-		yOffset = 30;
-		int width = 100;
-		int height = 100;
+		xOffset = 12;
+		yOffset = 13;
+		int width = 25;
+		int height = 22;
 		loadImage(type.path, width, height);
 	}
 

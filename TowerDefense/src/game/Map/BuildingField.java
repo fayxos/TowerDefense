@@ -35,7 +35,7 @@ public class BuildingField extends Field {
 		graphics.drawImage(image, x-xOffset, y-yOffset-move, null);
 		
 		if(structure != null) {
-			structure.draw(graphics, x, y);
+			structure.draw(graphics, x, y-move);
 		} 
 				
 	}

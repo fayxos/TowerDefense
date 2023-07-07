@@ -22,7 +22,7 @@ import game.Objects.EnemyType;
 
 class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener {
     private static final long serialVersionUID = 1L;
-    private static final Dimension PANEL_SIZE = new Dimension(1500, 900);
+    public static final Dimension PANEL_SIZE = new Dimension(1500, 900);
     private static final int REFRESH_RATE = 50;
 
     private Timer timer = new Timer(REFRESH_RATE, this);
@@ -79,30 +79,35 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
 
         this.map.draw(g);
 
-        for(int i=0; i<enemies.size(); i++) {
+        for(int i=0; i<enemies.size(); i++) { 	
+        	enemies.get(i).draw(g);
+        }
+                
+        GameState.draw(g);
+    }
+
+    // Timer
+    public void actionPerformed(ActionEvent e) { 
+    	if(GameState.gameOver) {
+    		repaint();
+    		return;
+    	}
+    	
+    	for(Enemy enemy : enemies) {
+        	enemy.move();
+        }
+    	
+    	for(int i=0; i<enemies.size(); i++) {
         	if(enemies.get(i).isDead()) {
         		GameState.lives--;
         		enemies.remove(i);
         		
         		if(GameState.lives == 0) {
         			GameState.gameOver = true;
-        			timer.stop();
         		}
-        		
-        		continue;
         	}
-        	
-        	enemies.get(i).draw(g);
         }
-        
-        GameState.draw(g);
-    }
-
-    // Timer
-    public void actionPerformed(ActionEvent e) {  
-    	for(Enemy enemy : enemies) {
-        	enemy.move();
-        }
+    	    	
         repaint();
     }
     
@@ -113,7 +118,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
     }
 
     public void mouseDragged(MouseEvent e) {
-	   
+    	
 	}
 
     public void keyPressed(KeyEvent e) {

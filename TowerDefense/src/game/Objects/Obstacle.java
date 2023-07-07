@@ -23,7 +23,7 @@ abstract public class Obstacle extends Structure {
 	}
 	
 	@Override
-	public void draw(Graphics graphics, int x, int y) {
+	public void draw(Graphics graphics, int x, int y) {		
 		graphics.drawImage(sprite, x-xOffset, y-yOffset, null);
 	}
 
