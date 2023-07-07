@@ -12,6 +12,7 @@ public class BuildingField extends Field {
 	final String imagePath = "assets/Sprites/Environment tiles/ground.png";
 	
 	public BuildingField() {
+		super();
 		loadImage(imagePath);
 	}
 	
