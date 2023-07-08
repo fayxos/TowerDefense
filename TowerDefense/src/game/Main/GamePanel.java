@@ -14,13 +14,14 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.event.MouseInputListener;
 
 import Objects.Enemy;
 import Objects.EnemyType;
 import game.Map.Field;
 import game.Map.Map;
 
-class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener {
+class GamePanel extends JPanel implements ActionListener, KeyListener, MouseInputListener {
     private static final long serialVersionUID = 1L;
     public static final Dimension PANEL_SIZE = new Dimension(1500, 900);
     private static final int REFRESH_RATE = 50;
@@ -38,6 +39,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
     public GamePanel() {
         addKeyListener(this);
         addMouseMotionListener(this);
+        addMouseListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         setBackground(Color.GREEN);
@@ -87,6 +89,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
     }
 
     // Timer
+    @Override
     public void actionPerformed(ActionEvent e) { 
     	if(GameState.gameOver) {
     		repaint();
@@ -111,16 +114,19 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
         repaint();
     }
     
+    @Override
     public void mouseMoved(MouseEvent e) {
        Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
        if(selectedField == null) Field.HighlightedID = -1;
        else Field.HighlightedID = selectedField.ID;
     }
-
+    
+    @Override
     public void mouseDragged(MouseEvent e) {
     	
 	}
-
+    
+    @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
@@ -130,12 +136,27 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
         }
         else if(code == KeyEvent.VK_UP) {
         }
-        else {
-            if(code == KeyEvent.VK_DOWN) {
-            }
+        else if(code == KeyEvent.VK_DOWN) {
         }
     }
-
+    
+    @Override
     public void keyTyped(KeyEvent e) {}
+    @Override
     public void keyReleased(KeyEvent e) {}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
+		System.out.println("mouse clicked");
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+	@Override
+	public void mouseExited(MouseEvent e) {}
 }
