@@ -1,6 +1,8 @@
 package game.Map;
 import java.awt.*;
 
+import game.Main.GamePanel;
+
 
 public class Field {
 	private static int IDCounter = 0;
@@ -8,10 +10,10 @@ public class Field {
 	public int ID;
 	int x;
 	int y;
-	public static final int xOffset = 50;
-	public static final int yOffset = 30;
-	static final int width = 103;
-	static final int height = 100;
+	public static final int xOffset = (int)(50*GamePanel.SCALING_FACTOR);
+	public static final int yOffset = (int)(30*GamePanel.SCALING_FACTOR);
+	static final int width = (int)(103*GamePanel.SCALING_FACTOR);
+	static final int height = (int)(100*GamePanel.SCALING_FACTOR);
 	Image image;
 	
 	public Field() {

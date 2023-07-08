@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import game.Main.GamePanel;
+
 public class Defender {
 	private int xOffset;
 	private int yOffset;
@@ -13,9 +15,9 @@ public class Defender {
 	private DefenderType type;
 	
 	public Defender(DefenderType type) {
-		this.width = type.width;
-		this.height = type.height;
-		this.yOffset = type.yOffset;
+		this.width = (int)(type.width*GamePanel.SCALING_FACTOR);
+		this.height = (int)(type.height*GamePanel.SCALING_FACTOR);
+		this.yOffset = (int)(type.yOffset*GamePanel.SCALING_FACTOR);
 		this.xOffset = width/2;
 		
 		loadImage(type.path);

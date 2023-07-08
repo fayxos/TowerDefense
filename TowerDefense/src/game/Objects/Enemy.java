@@ -27,10 +27,10 @@ public class Enemy {
 	
 	boolean dead = false;
 	
-	public static final int xOffset = 16;
-	public static final int yOffset = 20;
-	static final int width = 32;
-	static final int height = 24;
+	public static final int xOffset = (int)(16*GamePanel.SCALING_FACTOR);
+	public static final int yOffset = (int)(20*GamePanel.SCALING_FACTOR);
+	static final int width = (int)(32*GamePanel.SCALING_FACTOR);
+	static final int height = (int)(24*GamePanel.SCALING_FACTOR);
 	Image image;
 	EnemyType type;
 	

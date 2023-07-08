@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     public static final Dimension PANEL_SIZE = new Dimension(1500, 900);
     private static final int REFRESH_RATE = 50;
     public static final double SCALING_3D_HEIGHT_FACTOR = 0.566;
+    public static final double SCALING_FACTOR = 1.2;
 
     private Timer timer = new Timer(REFRESH_RATE, this);
             
@@ -56,7 +57,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         setBackground(Color.GREEN);
                 
         GameState.start();
-        this.map = new Map(PANEL_SIZE.width/2, PANEL_SIZE.height/6);
+        this.map = new Map(PANEL_SIZE.width/2, PANEL_SIZE.height/7);
         
         this.pathFields = new PathField[path.length];
         for(int i = 0; i<path.length; i++) {

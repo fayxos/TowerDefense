@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import game.Main.GamePanel;
+
 abstract public class Obstacle extends Structure {
 
 	int removingCost;
@@ -20,9 +22,9 @@ abstract public class Obstacle extends Structure {
 	
 	@Override
 	protected void loadStructure() {
-		xOffset = type.width/2;
-		yOffset = type.yOffset;
-		loadImage(type.path, type.width, type.height);
+		xOffset = (int)(type.width*GamePanel.SCALING_FACTOR)/2;
+		yOffset = (int)(type.yOffset*GamePanel.SCALING_FACTOR);
+		loadImage(type.path, (int)(type.width*GamePanel.SCALING_FACTOR), (int)(type.height*GamePanel.SCALING_FACTOR));
 	}
 	
 	public void loadImage(String imagePath, int width, int height) {

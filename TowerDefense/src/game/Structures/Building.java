@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Optional;
 
+import game.Main.GamePanel;
+
 abstract public class Building extends Structure {
 	
 	int buildingCost, upgradeCost[];
@@ -27,14 +29,14 @@ abstract public class Building extends Structure {
 	
 	@Override
 	protected void loadStructure() {
-		xOffsetBottom = bottomType.width/2;
-		yOffsetBottom = bottomType.yOffset;
-		loadImageBottom(bottomType.path, bottomType.width, bottomType.height);
+		xOffsetBottom = (int)(bottomType.width*GamePanel.SCALING_FACTOR)/2;
+		yOffsetBottom = (int)(bottomType.yOffset*GamePanel.SCALING_FACTOR);
+		loadImageBottom(bottomType.path, (int)(bottomType.width*GamePanel.SCALING_FACTOR), (int)(bottomType.height*GamePanel.SCALING_FACTOR));
 		
 		if(topType!=null) {
-			xOffsetTop = topType.width/2;
-			yOffsetTop = topType.yOffset;	
-			loadImageTop(topType.path, topType.width, topType.height);
+			xOffsetTop = (int)(topType.width*GamePanel.SCALING_FACTOR)/2;
+			yOffsetTop = (int)(topType.yOffset*GamePanel.SCALING_FACTOR);	
+			loadImageTop(topType.path, (int)(topType.width*GamePanel.SCALING_FACTOR), (int)(topType.height*GamePanel.SCALING_FACTOR));
 		}
 	}
 	

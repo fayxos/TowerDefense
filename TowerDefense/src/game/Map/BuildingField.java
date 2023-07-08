@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import game.Structures.Structure;
 import game.Structures.ActiveBuilding;
+import game.Structures.ArcherTower;
 
 public class BuildingField extends Field {
 	private Structure structure;
