@@ -4,7 +4,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import Objects.Defender;
+import Objects.DefenderType;
+
 public class ArcherTower extends ActiveBuilding {
+	private Defender defender;
 	
 	public ArcherTower() {
 		super();
@@ -16,6 +20,13 @@ public class ArcherTower extends ActiveBuilding {
 		attackRange = 250;
 		attackSpeed = 0;
 		attackDamage = 0;
+		defender = new Defender(DefenderType.ARCHER);
+	}
+	
+	public void draw(Graphics graphics, int x, int y) {
+		super.draw(graphics, x, y);
+		defender.draw(graphics, x, y);
+
 	}
 
 }
