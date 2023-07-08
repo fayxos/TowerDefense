@@ -3,7 +3,7 @@ package game.Map;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import Objects.Enemy;
+import game.Objects.Enemy;
 
 public class PathField extends Field {
 	PathFieldType type;

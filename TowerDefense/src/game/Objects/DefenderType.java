@@ -1,4 +1,4 @@
-package Objects;
+package game.Objects;
 
 public enum DefenderType {
 	ARCHER("assets/Sprites/Tower defender/Archer/archer_idle.png", 23, 19, 60),

@@ -1,4 +1,4 @@
-package Objects;
+package game.Objects;
 
 public class Bullet {
 	private double posX;	

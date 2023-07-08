@@ -4,8 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import Objects.Defender;
-import Objects.DefenderType;
+import game.Objects.Defender;
+import game.Objects.DefenderType;
 
 public class ArcherTower extends ActiveBuilding {
 	private Defender defender;

@@ -17,12 +17,12 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import Objects.Enemy;
-import Objects.EnemyType;
 import game.Map.BuildingField;
 import game.Map.Field;
 import game.Map.Map;
 import game.Map.PathField;
+import game.Objects.Enemy;
+import game.Objects.EnemyType;
 import game.Structures.ActiveBuilding;
 import game.Structures.ArcherTower;
 import game.Structures.Building;

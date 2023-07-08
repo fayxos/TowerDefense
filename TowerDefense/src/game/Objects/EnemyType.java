@@ -1,4 +1,4 @@
-package Objects;
+package game.Objects;
 
 public enum EnemyType {
 	GREEN_UFO("assets/Sprites/UFO/green ufo.png"),
