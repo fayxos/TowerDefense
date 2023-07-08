@@ -19,7 +19,7 @@ public class ArcherTower extends ActiveBuilding {
 		loadImageBottom(bottomType.path, bottomType.width, bottomType.height);
 		loadImageTop(topType.path, topType.width, topType.height);
 		
-		attackRange = 0;
+		attackRange = 250;
 		attackSpeed = 0;
 		attackDamage = 0;
 	}

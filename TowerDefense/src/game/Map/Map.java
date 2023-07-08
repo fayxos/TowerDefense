@@ -49,12 +49,12 @@ public class Map {
 		fields[3][6] = new BuildingField();
 		
 		fields[4][0] = new BuildingField();
-		fields[4][1] = new BuildingField();
+		fields[4][1] = new BuildingField(new ArcherTower());
 		fields[4][2] = new EnvironmentField(EnvironmentFieldType.TOP_LEFT_TO_BOTTOM_RIGHT_END);
 		fields[4][3] = new PathField(PathFieldType.BOTTOM_LEFT_TO_TOP_LEFT_CURVE);
 		fields[4][4] = new PathField(PathFieldType.BOTTOM_LEFT_TO_TOP_RIGHT_BRIDGE);
 		fields[4][5] = new PathField(PathFieldType.BOTTOM_RIGHT_TO_TOP_RIGHT_CURVE);
-		fields[4][6] = new BuildingField();
+		fields[4][6] = new BuildingField(new Tree(StructureType.STRAIGHT_TREE_L));
 		
 		fields[5][0] = new BuildingField(new Tree(StructureType.STRAIGHT_TREE_L));
 		fields[5][1] = new BuildingField();
@@ -91,6 +91,11 @@ public class Map {
 				fields[row][column].draw(graphics);
 			}
 		}
+		
+		if(Field.HighlightedField instanceof BuildingField) {
+			BuildingField highlightetField = (BuildingField)Field.HighlightedField;
+			highlightetField.drawBuilding(graphics);
+		} 
 	}
 	
 	public Field getFieldFromPosition(int x, int y) {

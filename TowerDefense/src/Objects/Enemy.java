@@ -4,15 +4,18 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import game.Main.GamePanel;
 import game.Map.Field;
 import game.Map.Map;
+import game.Map.PathField;
 
 public class Enemy {
 	private static int IDCounter = 0;
 	public int ID;
 	double x;
 	double y;
-	Field[] path;
+	public static PathField[] path;
+	public static GamePanel gamePanel;
 	int currentField = 0;
 	
 	int delay = 0;
@@ -31,10 +34,21 @@ public class Enemy {
 	Image image;
 	EnemyType type;
 	
-	public Enemy(EnemyType type, Field[] path) {
+	public static void spawnEnemy(EnemyType type) {
+		Enemy enemy = new Enemy(type);
+		gamePanel.enemies.add(enemy);
+		path[0].enemies.add(enemy);
+	}
+	
+	public static void spawnEnemy(EnemyType type, int delay) {
+		Enemy enemy = new Enemy(type, delay);
+		gamePanel.enemies.add(enemy);
+		path[1].enemies.add(enemy);
+	}
+	
+	private Enemy(EnemyType type) {
 		this.ID = IDCounter++;
 		this.type = type;
-		this.path = path;
 		loadImage(type.label);
 		place(path[0].getX(), path[0].getY());
 		
@@ -43,10 +57,9 @@ public class Enemy {
 		yVec = vec[1];
 	}
 	
-	public Enemy(EnemyType type, Field[] path, int delay) {
+	private Enemy(EnemyType type, int delay) {
 		this.ID = IDCounter++;
 		this.type = type;
-		this.path = path;
 		this.delay = delay;
 		loadImage(type.label);
 		
@@ -82,6 +95,11 @@ public class Enemy {
 			if(currentField == path.length-1) {
 				dead = true;
 				return;
+			}
+			
+			if(!(path[currentField].getX()>path[currentField+1].getX() && path[currentField].getY()>path[currentField+1].getY())) {
+				path[currentField].enemies.remove(this);
+				path[currentField+1].enemies.add(this);
 			}
 			
 			double[] vec = getNextVec();

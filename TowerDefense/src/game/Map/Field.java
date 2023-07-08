@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Field {
 	private static int IDCounter = 0;
-	public static int HighlightedID = -1;
+	public static Field HighlightedField = null;
 	public int ID;
 	int x;
 	int y;

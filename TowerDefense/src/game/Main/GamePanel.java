@@ -12,28 +12,32 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import Objects.Enemy;
 import Objects.EnemyType;
+import game.Map.BuildingField;
 import game.Map.Field;
 import game.Map.Map;
+import game.Map.PathField;
 
-class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener {
+public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener {
     private static final long serialVersionUID = 1L;
     public static final Dimension PANEL_SIZE = new Dimension(1500, 900);
     private static final int REFRESH_RATE = 50;
+    public static final double SCALING_3D_HEIGHT_FACTOR = 0.566;
 
     private Timer timer = new Timer(REFRESH_RATE, this);
-        
+            
     private Map map;
     private int[][] path = {
 		{3, 0}, {3, 1}, {3, 2}, {3, 3}, {2, 3}, {1, 3}, {2, 3}, {3, 3}, {4, 3}, {4, 4}, {4, 5}, {5, 5}, {6, 5}
     };
-    private Field[] pathFields;
+    private PathField[] pathFields;
     
-    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
     public GamePanel() {
         addKeyListener(this);
@@ -41,31 +45,34 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         setBackground(Color.GREEN);
-        
+                
         GameState.start();
         this.map = new Map(PANEL_SIZE.width/2, PANEL_SIZE.height/6);
         
-        this.pathFields = new Field[path.length];
+        this.pathFields = new PathField[path.length];
         for(int i = 0; i<path.length; i++) {
-        	this.pathFields[i] = this.map.fields[path[i][0]][path[i][1]];
+        	this.pathFields[i] = (PathField)this.map.fields[path[i][0]][path[i][1]];
         }
         
-        this.enemies.add(new Enemy(EnemyType.GREEN_UFO, pathFields));
-        this.enemies.add(new Enemy(EnemyType.GREY_UFO, pathFields, 10));
-        this.enemies.add(new Enemy(EnemyType.PRUPLE_UFO, pathFields, 20));
-        this.enemies.add(new Enemy(EnemyType.RED_UFO, pathFields, 40));
-        this.enemies.add(new Enemy(EnemyType.GREEN_UFO, pathFields, 60));
-        this.enemies.add(new Enemy(EnemyType.GREY_UFO, pathFields, 70));
-        this.enemies.add(new Enemy(EnemyType.PRUPLE_UFO, pathFields, 80));
-        this.enemies.add(new Enemy(EnemyType.RED_UFO, pathFields, 90));
-        this.enemies.add(new Enemy(EnemyType.GREEN_UFO, pathFields, 110));
-        this.enemies.add(new Enemy(EnemyType.GREY_UFO, pathFields, 115));
-        this.enemies.add(new Enemy(EnemyType.PRUPLE_UFO, pathFields, 120));
-        this.enemies.add(new Enemy(EnemyType.RED_UFO, pathFields, 150));
-        this.enemies.add(new Enemy(EnemyType.GREEN_UFO, pathFields, 160));
-        this.enemies.add(new Enemy(EnemyType.GREY_UFO, pathFields, 180));
-        this.enemies.add(new Enemy(EnemyType.PRUPLE_UFO, pathFields, 220));
-        this.enemies.add(new Enemy(EnemyType.RED_UFO, pathFields, 240));
+        Enemy.path = pathFields;
+        Enemy.gamePanel = this;
+        
+        Enemy.spawnEnemy(EnemyType.GREEN_UFO);
+        Enemy.spawnEnemy(EnemyType.GREY_UFO, 10);
+        Enemy.spawnEnemy(EnemyType.PRUPLE_UFO, 20);
+        Enemy.spawnEnemy(EnemyType.RED_UFO, 40);
+        Enemy.spawnEnemy(EnemyType.GREEN_UFO, 60);
+        Enemy.spawnEnemy(EnemyType.GREY_UFO, 70);
+        Enemy.spawnEnemy(EnemyType.PRUPLE_UFO, 80);
+        Enemy.spawnEnemy(EnemyType.RED_UFO, 90);
+        Enemy.spawnEnemy(EnemyType.GREEN_UFO, 110);
+        Enemy.spawnEnemy(EnemyType.GREY_UFO, 115);
+        Enemy.spawnEnemy(EnemyType.PRUPLE_UFO, 120);
+        Enemy.spawnEnemy(EnemyType.RED_UFO, 150);
+        Enemy.spawnEnemy(EnemyType.GREEN_UFO, 160);
+        Enemy.spawnEnemy(EnemyType.GREY_UFO, 180);
+        Enemy.spawnEnemy(EnemyType.PRUPLE_UFO, 220);
+        Enemy.spawnEnemy(EnemyType.RED_UFO, 240);
         
         timer.start();      
     }
@@ -78,10 +85,6 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
         super.paintComponent(g);
 
         this.map.draw(g);
-
-        for(int i=0; i<enemies.size(); i++) { 	
-        	enemies.get(i).draw(g);
-        }
                 
         GameState.draw(g);
     }
@@ -97,10 +100,12 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
         	enemy.move();
         }
     	
-    	for(int i=0; i<enemies.size(); i++) {
-        	if(enemies.get(i).isDead()) {
+    	for(int i=0; i<pathFields.length; i++) {
+    		for(int j=0; j<pathFields[i].enemies.size(); j++)
+        	if(pathFields[i].enemies.get(j).isDead()) {
         		GameState.lives--;
-        		enemies.remove(i);
+        		enemies.remove(pathFields[i].enemies.get(j));
+        		pathFields[i].enemies.remove(j);
         		
         		if(GameState.lives == 0) {
         			GameState.gameOver = true;
@@ -112,9 +117,9 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMoti
     }
     
     public void mouseMoved(MouseEvent e) {
-       Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
-       if(selectedField == null) Field.HighlightedID = -1;
-       else Field.HighlightedID = selectedField.ID;
+        Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
+        if(selectedField == null) Field.HighlightedField = null;
+        else Field.HighlightedField = selectedField;
     }
 
     public void mouseDragged(MouseEvent e) {
