@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
@@ -22,8 +23,11 @@ import game.Map.BuildingField;
 import game.Map.Field;
 import game.Map.Map;
 import game.Map.PathField;
+import game.Structures.ActiveBuilding;
+import game.Structures.ArcherTower;
+import game.Structures.Building;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener {
+public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener, MouseListener {
     private static final long serialVersionUID = 1L;
     public static final Dimension PANEL_SIZE = new Dimension(1500, 900);
     private static final int REFRESH_RATE = 50;
@@ -38,10 +42,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     private PathField[] pathFields;
     
     public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    int mouseX = -50;
+    int mouseY = -50;
+    
+    private Building newBuilding;
 
     public GamePanel() {
         addKeyListener(this);
         addMouseMotionListener(this);
+        addMouseListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         setBackground(Color.GREEN);
@@ -87,6 +96,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         this.map.draw(g);
                 
         GameState.draw(g);
+        
+        if(newBuilding != null) {
+        	if(newBuilding instanceof ActiveBuilding) {
+        		ActiveBuilding building = (ActiveBuilding)newBuilding;
+        		building.draw(g, mouseX, mouseY, true);
+        	} else {
+            	newBuilding.draw(g, mouseX, mouseY);
+        	}
+        }
     }
 
     // Timer
@@ -123,8 +141,39 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     }
 
     public void mouseDragged(MouseEvent e) {
-    	
+		Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
+		if(selectedField == null) Field.HighlightedField = null;
+		else if(selectedField instanceof BuildingField) {
+			BuildingField field = (BuildingField)selectedField;
+			if(!field.hasStructure()) {
+				Field.HighlightedField = selectedField;
+			}
+		} else {
+			Field.HighlightedField = null;
+		}
+		
+		if(newBuilding == null && selectedField == null) {
+			newBuilding = new ArcherTower();
+		} 
+		
+		mouseX = e.getX();
+		mouseY = e.getY();
 	}
+    
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    	Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
+    	if(selectedField instanceof BuildingField && newBuilding != null) {
+			BuildingField field = (BuildingField)selectedField;
+			if(!field.hasStructure()) {
+				field.setStructure(newBuilding);
+			}
+        }
+    	
+    	Field.HighlightedField = null;
+        
+        newBuilding = null;
+    }
 
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -142,5 +191,31 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     }
 
     public void keyTyped(KeyEvent e) {}
+    
     public void keyReleased(KeyEvent e) {}
+
+    
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

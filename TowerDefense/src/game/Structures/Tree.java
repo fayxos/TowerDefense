@@ -8,10 +8,8 @@ public class Tree extends Obstacle {
 	
 	public Tree(StructureType type) {
 		super();
-		xOffset = type.width/2;
-		yOffset = type.yOffset;
-
-		loadImage(type.path, type.width, type.height);
+		this.type = type;
+		loadStructure();
 	}
 
 }

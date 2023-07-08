@@ -57,4 +57,8 @@ public class BuildingField extends Field {
 		ActiveBuilding building = (ActiveBuilding)structure;
 		building.draw(graphics, x, y-move, true);
 	}
+	
+	public boolean hasStructure() {
+		return structure != null;
+	}
 }

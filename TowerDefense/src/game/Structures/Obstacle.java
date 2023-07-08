@@ -10,11 +10,19 @@ abstract public class Obstacle extends Structure {
 	
 	boolean isRemovable;
 	
+	StructureType type;
 	Image sprite;
 	int xOffset, yOffset;
 	
 	protected Obstacle() {
 		super();
+	}
+	
+	@Override
+	protected void loadStructure() {
+		xOffset = type.width/2;
+		yOffset = type.yOffset;
+		loadImage(type.path, type.width, type.height);
 	}
 	
 	public void loadImage(String imagePath, int width, int height) {

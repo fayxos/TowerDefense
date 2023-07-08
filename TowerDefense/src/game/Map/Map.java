@@ -50,6 +50,7 @@ public class Map {
 		
 		fields[4][0] = new BuildingField();
 		fields[4][1] = new BuildingField(new ArcherTower());
+		fields[4][1] = new BuildingField(new TestBuilding());
 		fields[4][2] = new EnvironmentField(EnvironmentFieldType.TOP_LEFT_TO_BOTTOM_RIGHT_END);
 		fields[4][3] = new PathField(PathFieldType.BOTTOM_LEFT_TO_TOP_LEFT_CURVE);
 		fields[4][4] = new PathField(PathFieldType.BOTTOM_LEFT_TO_TOP_RIGHT_BRIDGE);
