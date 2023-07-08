@@ -45,7 +45,7 @@ public class Map {
 		fields[3][2] = new PathField(PathFieldType.BOTTOM_LEFT_TO_TOP_RIGHT_BRIDGE);
 		fields[3][3] = new PathField(PathFieldType.TOP_LEFT_TO_TOP_RIGHT_AND_BOTTOM_RIGHT_CROSSING);
 		fields[3][4] = new EnvironmentField(EnvironmentFieldType.TOP_LEFT_TO_BOTTOM_RIGHT_PATH);
-		fields[3][5] = new BuildingField();
+		fields[3][5] = new BuildingField(new ArcherTower());
 		fields[3][6] = new BuildingField();
 		
 		fields[4][0] = new BuildingField();

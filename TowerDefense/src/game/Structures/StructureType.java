@@ -1,13 +1,13 @@
 package game.Structures;
 
 public enum StructureType {
-	GREEN_TOWER_BOTTOM_1("assets/Sprites/Tower tiles/Green tower/block(1).png"),
+	GREEN_TOWER_BOTTOM_1("assets/Sprites/Tower tiles/Green tower/block(1).png", 63, 64, 44),
 	GREEN_TOWER_BOTTOM_2("assets/Sprites/Tower tiles/Green tower/block(2).png"),
 	GREEN_TOWER_BOTTOM_3("assets/Sprites/Tower tiles/Green tower/block(3).png"),
 	GREEN_TOWER_BOTTOM_4("assets/Sprites/Tower tiles/Green tower/block(4).png"),
 	GREEN_TOWER_BOTTOM_5("assets/Sprites/Tower tiles/Green tower/block(5).png"),
-	GREEN_TOWER_TOP_1("assets/Sprites/Tower tiles/Green tower/block(6).png"),
-	GREEN_TOWER_TOP_2("assets/Sprites/Tower tiles/Green tower/block(7).png"),
+	GREEN_TOWER_TOP_1("assets/Sprites/Tower tiles/Green tower/block(6).png", 75, 70, 50),
+	GREEN_TOWER_TOP_2("assets/Sprites/Tower tiles/Green tower/block(7).png", 75, 70, 50),
 	GREEN_TOWER_TOP_3("assets/Sprites/Tower tiles/Green tower/block(8).png"),
 	GREEN_TOWER_TOP_4("assets/Sprites/Tower tiles/Green tower/block(9).png"),
 	GREEN_TOWER_TOP_5("assets/Sprites/Tower tiles/Green tower/block(10).png"),

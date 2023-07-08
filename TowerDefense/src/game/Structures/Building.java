@@ -6,15 +6,14 @@ import java.awt.Toolkit;
 
 abstract public class Building extends Structure {
 	
-	Image bottomSprite, topSprite;
-	
-	int spriteXOffset, spriteYOffset;
-	
 	int buildingCost, upgradeCost[];
 	
 	int level, maxLevel;
 	
-	
+	Image bottomSprite, topSprite;
+	int xOffsetBottom, yOffsetBottom, 
+		xOffsetTop, yOffsetTop,
+		spriteYOffset;
 	
 	protected Building() {
 		super();
@@ -24,16 +23,26 @@ abstract public class Building extends Structure {
 		return level < maxLevel;
 	}
 	
-	public void loadImage(String imagePath) {
+	public void loadImageBottom(String imagePath, int width, int height) {
+		Image i = loadImage(imagePath, width, height);
+        bottomSprite = i;
+	}
+	
+	public void loadImageTop(String imagePath, int width, int height) {
+		Image i = loadImage(imagePath, width, height);
+        topSprite = i;
+	}
+	
+	private Image loadImage(String imagePath, int width, int height) {
 		Toolkit t = Toolkit.getDefaultToolkit();  
         Image i = t.getImage(imagePath); 
-        bottomSprite = i.getScaledInstance((int)(i.getWidth(null)*scalingFactor), (int)(i.getHeight(null)*scalingFactor), Image.SCALE_SMOOTH);
+        return i.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 	}
 	
 	@Override
 	public void draw(Graphics graphics, int x, int y) {
-		graphics.drawImage(bottomSprite, x-xOffset, y-yOffset, null);
-		graphics.drawImage(bottomSprite, x-xOffset-spriteXOffset, y-yOffset-spriteYOffset, null);
+		graphics.drawImage(bottomSprite, x-xOffsetBottom, y-yOffsetBottom, null);
+		graphics.drawImage(topSprite, x-xOffsetTop, y-yOffsetTop-spriteYOffset, null);
 	}
 
 }

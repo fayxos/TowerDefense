@@ -11,6 +11,7 @@ abstract public class Obstacle extends Structure {
 	boolean isRemovable;
 	
 	Image sprite;
+	int xOffset, yOffset;
 	
 	protected Obstacle() {
 		super();
