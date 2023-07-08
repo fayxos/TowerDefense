@@ -8,16 +8,10 @@ public class ArcherTower extends ActiveBuilding {
 	
 	public ArcherTower() {
 		super();
-		StructureType bottomType = StructureType.GREEN_TOWER_BOTTOM_1;
-		StructureType topType = StructureType.GREEN_TOWER_TOP_2;
-		xOffsetBottom = bottomType.width/2;
-		yOffsetBottom = bottomType.yOffset;
-		xOffsetTop = topType.width/2;
-		yOffsetTop = topType.yOffset;
+		bottomType = StructureType.GREEN_TOWER_BOTTOM_1;
+		topType = StructureType.GREEN_TOWER_TOP_2;
 		spriteYOffset = 26;
-
-		loadImageBottom(bottomType.path, bottomType.width, bottomType.height);
-		loadImageTop(topType.path, topType.width, topType.height);
+		loadStructure();
 		
 		attackRange = 0;
 		attackSpeed = 0;

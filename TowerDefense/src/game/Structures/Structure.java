@@ -13,6 +13,8 @@ abstract public class Structure {
 		ID = IDCounter++;
 	}
 	
+	abstract protected void loadStructure();
+	
 	abstract public void draw(Graphics graphics, int x, int y);
 	
 }
