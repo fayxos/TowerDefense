@@ -162,6 +162,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     
     @Override
     public void mouseReleased(MouseEvent e) {
+    	System.out.println("test");
     	Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
     	if(selectedField instanceof BuildingField && newBuilding != null) {
 			BuildingField field = (BuildingField)selectedField;
