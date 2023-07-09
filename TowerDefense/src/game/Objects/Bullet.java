@@ -1,37 +1,62 @@
 package game.Objects;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 public class Bullet {
-	private double posX;	
-	private double posY;
-	private double vDirX;
-	private double vDirY;
-	private double speed;  
+	public double x;	
+	public double y;
+	public double vDirX;
+	public double vDirY;
+	public double speed; 
 	
-	public Bullet(double posX, double posY, double speed) {
-		this.posX = posX;
-		this.posY = posY;
+	public int xOffset;
+	public int yOffset;
+	
+	public int damage;
+	
+	public String imagePath;
+	
+	public Enemy enemy;
+	public Image image;
+
+	
+	public Bullet(Enemy enemy, int damage) {
+		this.enemy = enemy;
+		this.damage = damage;
 	}
 	
-	public void move(double enemyPosX, double enemyPosY) {
-		posX = speed * calcDirecX(enemyPosX, enemyPosY);
-		posY = speed * calcDirY(enemyPosY, enemyPosX);
+	public void move() {
+		x = speed * calcDirecX(enemy.x, enemy.y);
+		y = speed * calcDirY(enemy.x, enemy.y);
 	}
 	
-	private double calcDirecX(double enemyPosX, double enemyPosY) {
-		return (enemyPosX - posX)/Math.sqrt(Math.pow(enemyPosY - posY, 2) + Math.pow(enemyPosX-posX, 2)) ;
+	private double calcDirecX(double enemyx, double enemyy) {
+		return (enemyx - x)/Math.sqrt(Math.pow(enemyy - y, 2) + Math.pow(enemyx-x, 2)) ;
 		
 	}
-	private double calcDirY(double enemyPosY, double enemyPosX) {
-		return (enemyPosY - posY)/Math.sqrt(Math.pow(enemyPosY - posY, 2) + Math.pow(enemyPosX-posX, 2)) ;
+	private double calcDirY(double enemyy, double enemyx) {
+		return (enemyy - y)/Math.sqrt(Math.pow(enemyy - y, 2) + Math.pow(enemyx-x, 2)) ;
+	}
+	
+	public void loadImage(String imagePath, int width, int height) {
+		Toolkit t = Toolkit.getDefaultToolkit();  
+        Image i = t.getImage(imagePath); 
+        image = i.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+	}
+	
+	public void draw(Graphics graphics) {		
+		graphics.drawImage(image, (int)x-xOffset, (int)y-yOffset, null);
 	}
 
 	
-	public double getPosX() {
-		return posX;
+	public double getX() {
+		return x;
 	}
 
-	public double getPosY() {
-		return posY;
+	public double getY() {
+		return y;
 	}
 
 	public double getvDirX() {

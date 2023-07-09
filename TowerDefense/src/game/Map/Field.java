@@ -1,10 +1,14 @@
 package game.Map;
 import java.awt.*;
+import java.util.ArrayList;
 
 import game.Main.GamePanel;
+import game.Objects.Arrow;
+import game.Objects.Bullet;
+import game.Objects.Enemy;
 
 
-public class Field {
+public abstract class Field {
 	private static int IDCounter = 0;
 	public static Field HighlightedField = null;
 	public int ID;
@@ -15,6 +19,8 @@ public class Field {
 	static final int width = (int)(103*GamePanel.SCALING_FACTOR);
 	static final int height = (int)(100*GamePanel.SCALING_FACTOR);
 	Image image;
+	
+	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	
 	public Field() {
 		this.ID = IDCounter++;
@@ -33,6 +39,16 @@ public class Field {
 	
 	public void draw(Graphics graphics) {
 		graphics.drawImage(image, x-xOffset, y-yOffset, null);
+		
+		for(Bullet bullet : bullets) {
+			
+			if(bullet instanceof Arrow) {
+				Arrow arrow = (Arrow)bullet;
+				arrow.draw(graphics);
+			} else {
+				bullet.draw(graphics);
+			}
+		}
 	}
 	
 	

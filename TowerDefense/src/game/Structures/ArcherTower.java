@@ -1,12 +1,15 @@
 package game.Structures;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import game.Main.GamePanel;
+import game.Objects.Arrow;
 import game.Objects.Defender;
 import game.Objects.DefenderType;
 
 public class ArcherTower extends ActiveBuilding {
+	
 	public Defender defender;
 	
 	public ArcherTower() {
@@ -16,9 +19,9 @@ public class ArcherTower extends ActiveBuilding {
 		spriteYOffset = (int)(26*GamePanel.SCALING_FACTOR);
 		loadStructure();
 		
-		attackRange = 250;
-		attackSpeed = 0;
-		attackDamage = 0;
+		attackRange = 125;
+		attackSpeed = 1;
+		attackDamage = 20;
 		defender = new Defender(DefenderType.ARCHER);
 	}
 	
