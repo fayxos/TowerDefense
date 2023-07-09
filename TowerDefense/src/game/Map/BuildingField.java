@@ -62,4 +62,8 @@ public class BuildingField extends Field {
 	public boolean hasStructure() {
 		return structure != null;
 	}
+	
+	public Structure getStructure() {
+		return structure;
+	}
 }

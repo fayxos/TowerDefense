@@ -26,6 +26,8 @@ import game.Objects.EnemyType;
 import game.Structures.ActiveBuilding;
 import game.Structures.ArcherTower;
 import game.Structures.Building;
+import game.Structures.Obstacle;
+import game.Structures.Structure;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener, MouseListener {
     private static final long serialVersionUID = 1L;
@@ -57,6 +59,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         setBackground(Color.GREEN);
                 
         GameState.start();
+        
+        GameShop.start();
+        
         this.map = new Map(PANEL_SIZE.width/2, PANEL_SIZE.height/7);
         
         this.pathFields = new PathField[path.length];
@@ -97,6 +102,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         this.map.draw(g);
                 
         GameState.draw(g);
+        
+        GameShop.draw(g);
         
         if(newBuilding != null) {
         	if(newBuilding instanceof ActiveBuilding) {
@@ -163,7 +170,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     
     @Override
     public void mouseReleased(MouseEvent e) {
-    	System.out.println("test");
     	Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
     	if(selectedField instanceof BuildingField && newBuilding != null) {
 			BuildingField field = (BuildingField)selectedField;
@@ -176,7 +182,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         
         newBuilding = null;
     }
-
+    
+    @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
@@ -191,33 +198,37 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
             }
         }
     }
-
+    
+    @Override
     public void keyTyped(KeyEvent e) {}
     
+    @Override
     public void keyReleased(KeyEvent e) {}
 
     
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
+    	if(selectedField instanceof BuildingField) {
+    		BuildingField field = (BuildingField) selectedField;
+    		if(field.hasStructure()) {
+    			Structure structure = field.getStructure();
+    			if(structure instanceof Obstacle) {
+    				
+    			} else if(structure instanceof Building) {
+    				
+    			}
+    		}
+    	}
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mousePressed(MouseEvent e) {}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e) {}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e) {}
+	
 }

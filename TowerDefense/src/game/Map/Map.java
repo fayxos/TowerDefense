@@ -94,8 +94,8 @@ public class Map {
 		}
 		
 		if(Field.HighlightedField instanceof BuildingField) {
-			BuildingField highlightetField = (BuildingField)Field.HighlightedField;
-			highlightetField.drawBuilding(graphics);
+			BuildingField highlightedField = (BuildingField)Field.HighlightedField;
+			highlightedField.drawBuilding(graphics);
 		} 
 	}
 	
