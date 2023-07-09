@@ -8,10 +8,13 @@ import game.Main.GamePanel;
 import game.Map.Field;
 import game.Objects.Arrow;
 import game.Objects.Bullet;
+import game.Objects.Defender;
 import game.Objects.Enemy;
 
 public abstract class ActiveBuilding extends Building {
 
+	public Defender defender;
+	
 	public Enemy attackedEnemy;
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>(); 
 	
@@ -22,6 +25,10 @@ public abstract class ActiveBuilding extends Building {
 		super();
 	}
 	
+	public void draw(Graphics graphics, int x, int y) {
+		this.draw(graphics, x, y, false);
+	}
+	
 	public void draw(Graphics graphics, int x, int y, boolean selected) {
 		if(selected) {
 			graphics.setColor(new Color(255, 255, 255, 180));
@@ -30,6 +37,10 @@ public abstract class ActiveBuilding extends Building {
 		}
 
 		super.draw(graphics, x, y);
+		
+		if(defender != null) {
+			defender.draw(graphics, x, y);
+		}
 	}
 	
 	public void updateBullets(Field field) {

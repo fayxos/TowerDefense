@@ -25,11 +25,15 @@ public class GameShop {
 	
 	public static void draw(Graphics graphics) {
 		AffineTransform trans = new AffineTransform();
-		trans.translate(15 + height,660);
-		trans.rotate(Math.toRadians(90));
+		trans.rotate(Math.PI/2);
+
+		trans.translate(660,-(15 + height));
 		((Graphics2D)graphics).drawImage(shopCardImage, trans, null);
-		trans.translate(15 + height,660);
-		trans.rotate(Math.toRadians(90));
+		trans.translate(0,-(15 + height));
+		((Graphics2D)graphics).drawImage(shopCardImage, trans, null);
+		trans.translate(0,-(15 + height));
+		((Graphics2D)graphics).drawImage(shopCardImage, trans, null);
+		trans.translate(0,-(15 + height));
 		((Graphics2D)graphics).drawImage(shopCardImage, trans, null);
 	}
 
