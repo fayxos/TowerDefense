@@ -32,7 +32,13 @@ public class BuildingField extends Field {
 		
 		
 		ActiveBuilding building = (ActiveBuilding)structure;
-		building.updateBullets(this);
+		
+		if(building instanceof ArcherTower) {
+			ArcherTower tower = (ArcherTower)building;
+			tower.updateBullets(this);
+		} else {
+			building.updateBullets(this);
+		}
 	}
 	
 	@Override
@@ -55,6 +61,8 @@ public class BuildingField extends Field {
 				bullet.draw(graphics);
 			}
 		}
+		
+		bullets.clear();
 		
 		if(structure != null) {
 			

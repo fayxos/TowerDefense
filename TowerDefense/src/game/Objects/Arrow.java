@@ -9,8 +9,12 @@ public class Arrow extends Bullet {
 	public Arrow(Enemy enemy, int damage) {
 		super(enemy, damage);
 		this.imagePath = "assets/Sprites/Tower defender/Archer/arrow.png";
-		this.speed = 1;
-		loadImage(imagePath, (int)(11*GamePanel.SCALING_FACTOR), (int)(27*GamePanel.SCALING_FACTOR));
+		this.speed = 20;
+		
+		loadImage(imagePath, (int)(13*GamePanel.SCALING_FACTOR), (int)(5*GamePanel.SCALING_FACTOR));
+		
+		xOffset = (int)(13*GamePanel.SCALING_FACTOR/2);
+		yOffset = 2;
 	}
 	
 	@Override

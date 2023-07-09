@@ -4,11 +4,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import game.Main.GamePanel;
+import game.Map.Field;
+import game.Map.Map;
+
 public class Bullet {
 	public double x;	
 	public double y;
-	public double vDirX;
-	public double vDirY;
 	public double speed; 
 	
 	public int xOffset;
@@ -21,23 +23,42 @@ public class Bullet {
 	public Enemy enemy;
 	public Image image;
 
+	public static Map map;
+	
+	public boolean shouldRemove = false;
 	
 	public Bullet(Enemy enemy, int damage) {
 		this.enemy = enemy;
 		this.damage = damage;
 	}
 	
-	public void move() {
-		x = speed * calcDirecX(enemy.x, enemy.y);
-		y = speed * calcDirY(enemy.x, enemy.y);
+	public void place(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 	
-	private double calcDirecX(double enemyx, double enemyy) {
-		return (enemyx - x)/Math.sqrt(Math.pow(enemyy - y, 2) + Math.pow(enemyx-x, 2)) ;
-		
+	public void move() {
+		double[] vec = getNextVec(); 
+		x += speed * vec[0];
+		y += speed * vec[1];
+
+		Field field = map.getFieldFromPosition((int)x, (int)y);
+		if(field != null) {
+			field.bullets.add(this);
+		}
 	}
-	private double calcDirY(double enemyy, double enemyx) {
-		return (enemyy - y)/Math.sqrt(Math.pow(enemyy - y, 2) + Math.pow(enemyx-x, 2)) ;
+	
+	private double[] getNextVec() {
+		double[] vec = new double[2];
+		
+		double vecX = enemy.x-x;		
+		double vecY = enemy.y-y;
+		
+		double len = Math.sqrt(Math.pow(vecX, 2) + Math.pow(vecY, 2));
+		
+		vec[0] = (vecX / len);
+		vec[1] = (vecY / len);
+		return vec;
 	}
 	
 	public void loadImage(String imagePath, int width, int height) {
@@ -57,14 +78,6 @@ public class Bullet {
 
 	public double getY() {
 		return y;
-	}
-
-	public double getvDirX() {
-		return vDirX;
-	}
-
-	public double getvDirY() {
-		return vDirY;
 	}
 
 	public double getSpeed() {

@@ -4,9 +4,12 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import game.Main.GamePanel;
+import game.Map.Field;
 import game.Objects.Arrow;
+import game.Objects.Bullet;
 import game.Objects.Defender;
 import game.Objects.DefenderType;
+import game.Objects.Enemy;
 
 public class ArcherTower extends ActiveBuilding {
 	
@@ -19,8 +22,8 @@ public class ArcherTower extends ActiveBuilding {
 		spriteYOffset = (int)(26*GamePanel.SCALING_FACTOR);
 		loadStructure();
 		
-		attackRange = 125;
-		attackSpeed = 1;
+		attackRange = 250;
+		attackSpeed = 20;
 		attackDamage = 20;
 		defender = new Defender(DefenderType.ARCHER);
 	}
@@ -36,6 +39,37 @@ public class ArcherTower extends ActiveBuilding {
 		
 		if(defender != null) {
 			defender.draw(graphics, x, y);
+		}
+	}
+	
+	public void updateBullets(Field field) {
+		if(attackedEnemy == null) {
+			Enemy enemy = Enemy.getClosestEnemy(field.getX(), field.getY());
+			
+			if(enemy == null) return;
+			if(Enemy.calculateDistanceToEnemy(field.getX(), field.getY(), enemy) > attackRange) return;
+			
+			attackedEnemy = enemy;
+			System.out.println("Ein");
+		}
+		else if(Enemy.calculateDistanceToEnemy(field.getX(), field.getY(), attackedEnemy) > attackRange) {
+			attackedEnemy = null;
+			System.out.println("Aus");
+		}
+		else {
+			
+			if(attackTick % attackSpeed == 0) {
+				
+				Arrow arrow = new Arrow(attackedEnemy, attackDamage);
+				arrow.place(field.getX(), field.getY());
+				bullets.add(arrow);
+				field.bullets.add(arrow);	
+				
+			}
+			
+			attackTick++;
+			
+			moveBullets();
 		}
 	}
 

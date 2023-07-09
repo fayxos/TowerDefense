@@ -25,7 +25,8 @@ public class Enemy {
 	double xVec;
 	double yVec;
 	
-	boolean dead = false;
+	public int lives = 100;
+	public boolean dead = false;
 	
 	public static final int xOffset = (int)(16*GamePanel.SCALING_FACTOR);
 	public static final int yOffset = (int)(20*GamePanel.SCALING_FACTOR);
@@ -37,7 +38,7 @@ public class Enemy {
 	public static void spawnEnemy(EnemyType type) {
 		Enemy enemy = new Enemy(type);
 		gamePanel.enemies.add(enemy);
-		path[0].enemies.add(enemy);
+		path[1].enemies.add(enemy);
 	}
 	
 	public static void spawnEnemy(EnemyType type, int delay) {
@@ -155,7 +156,7 @@ public class Enemy {
 	
 	public static double calculateDistanceToEnemy(int x, int y, Enemy enemy) {
 		int xVec = (int)enemy.x - x;
-		int yVec = (int)((enemy.y - y)*GamePanel.SCALING_3D_HEIGHT_FACTOR);
+		int yVec = (int)((enemy.y - y)*GamePanel.SCALING_3D_HEIGHT_FACTOR)*2;
 		
 		double distance = Math.sqrt(Math.pow(xVec, 2) + Math.pow(yVec, 2));
 		

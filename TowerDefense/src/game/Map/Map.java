@@ -2,6 +2,8 @@ package game.Map;
 
 import java.awt.Graphics;
 
+import game.Main.GamePanel;
+import game.Objects.Bullet;
 import game.Structures.*;
 
 public class Map {
@@ -124,10 +126,11 @@ public class Map {
 	
 	public static double calculateDistanceToField(int x, int y, Field field) {
 		int xVec = field.x - x;
-		int yVec = field.y - y;
+		int yVec = (int)((field.y - y)*GamePanel.SCALING_3D_HEIGHT_FACTOR)*2;
 		
 		double distance = Math.sqrt(Math.pow(xVec, 2) + Math.pow(yVec, 2));
 		
 		return distance;
 	}
+	
 }

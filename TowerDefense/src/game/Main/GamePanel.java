@@ -21,6 +21,7 @@ import game.Map.BuildingField;
 import game.Map.Field;
 import game.Map.Map;
 import game.Map.PathField;
+import game.Objects.Bullet;
 import game.Objects.Enemy;
 import game.Objects.EnemyType;
 import game.Structures.ActiveBuilding;
@@ -38,7 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
     private Timer timer = new Timer(REFRESH_RATE, this);
             
-    private Map map;
+    public static Map map;
     private int[][] path = {
 		{3, 0}, {3, 1}, {3, 2}, {3, 3}, {2, 3}, {1, 3}, {2, 3}, {3, 3}, {4, 3}, {4, 4}, {4, 5}, {5, 5}, {6, 5}
     };
@@ -62,12 +63,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         
         GameShop.start();
         
-        this.map = new Map(PANEL_SIZE.width/2, PANEL_SIZE.height/7);
+        map = new Map(PANEL_SIZE.width/2, PANEL_SIZE.height/7);
         
         this.pathFields = new PathField[path.length];
         for(int i = 0; i<path.length; i++) {
         	this.pathFields[i] = (PathField)this.map.fields[path[i][0]][path[i][1]];
         }
+        
+        Bullet.map = map;
         
         Enemy.path = pathFields;
         Enemy.gamePanel = this;
@@ -101,7 +104,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        this.map.draw(g);
+        map.draw(g);
                 
         GameState.draw(g);
         

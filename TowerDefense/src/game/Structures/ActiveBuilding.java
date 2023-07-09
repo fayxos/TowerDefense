@@ -47,10 +47,13 @@ public abstract class ActiveBuilding extends Building {
 			System.out.println("Aus");
 		}
 		else {
-			
-			if(attackTick % attackSpeed == 0) {
+			if(attackedEnemy.isDead()) {
+				attackedEnemy = null;
+			}	
+			else if(attackTick % attackSpeed == 0) {
 				
 				Bullet bullet = new Bullet(attackedEnemy, attackDamage);
+				bullet.place(field.getX(), field.getY());
 				bullets.add(bullet);
 				field.bullets.add(bullet);	
 				
@@ -58,10 +61,34 @@ public abstract class ActiveBuilding extends Building {
 			
 			attackTick++;
 			
-			for(Bullet bullet : bullets) {
-				bullet.move();
-			}
+			moveBullets();
+			
 		}
+	}
+	
+	public void moveBullets() {
+		ArrayList<Bullet> newBullets = new ArrayList<Bullet>();
+				
+		for(Bullet bullet : bullets) {
+			bullet.move();
+			
+			if(bullet.enemy.isDead()) {
+				bullet.enemy = null;
+				bullet.shouldRemove = true;
+			}
+			else if(Enemy.calculateDistanceToEnemy((int)bullet.getX(), (int)bullet.getY(), bullet.enemy) < 10) {
+				bullet.enemy.lives -= bullet.damage;
+					
+				bullet.shouldRemove = true;
+				
+				if(bullet.enemy.lives <= 0) bullet.enemy.dead = true;
+			} else {
+				newBullets.add(bullet);
+			}
+			
+		}
+		
+		bullets = newBullets;
 	}
 
 }

@@ -40,6 +40,12 @@ public abstract class Field {
 	public void draw(Graphics graphics) {
 		graphics.drawImage(image, x-xOffset, y-yOffset, null);
 		
+		ArrayList<Bullet> newBullets = new ArrayList<Bullet>();
+		for(Bullet bullet : bullets) {
+			if(!bullet.shouldRemove) newBullets.add(bullet);
+		}
+		bullets = newBullets;
+		
 		for(Bullet bullet : bullets) {
 			
 			if(bullet instanceof Arrow) {
