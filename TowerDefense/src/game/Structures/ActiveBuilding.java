@@ -25,6 +25,7 @@ public abstract class ActiveBuilding extends Building {
 		super();
 	}
 	
+	@Override
 	public void draw(Graphics graphics, int x, int y) {
 		this.draw(graphics, x, y, false);
 	}
