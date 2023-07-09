@@ -3,6 +3,7 @@ package game.Objects;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 import game.Main.GamePanel;
 
@@ -13,7 +14,7 @@ public class Defender {
 	private int width;
 	private int height;
 	private DefenderType type;
-	
+		
 	public Defender(DefenderType type) {
 		this.width = (int)(type.width*GamePanel.SCALING_FACTOR);
 		this.height = (int)(type.height*GamePanel.SCALING_FACTOR);

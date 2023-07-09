@@ -3,6 +3,8 @@ package game.Map;
 import java.awt.Graphics;
 
 import game.Structures.Structure;
+import game.Objects.Arrow;
+import game.Objects.Bullet;
 import game.Structures.ActiveBuilding;
 import game.Structures.ArcherTower;
 
@@ -24,6 +26,15 @@ public class BuildingField extends Field {
 		this.structure = structure;
 	}
 	
+	public void update() {
+		if(structure == null) return;
+		if(!(structure instanceof ActiveBuilding)) return;
+		
+		
+		ActiveBuilding building = (ActiveBuilding)structure;
+		building.updateBullets(this);
+	}
+	
 	@Override
 	public void draw(Graphics graphics) {
 		int move = 0;
@@ -33,8 +44,17 @@ public class BuildingField extends Field {
 			}
 		}
 
-
 		graphics.drawImage(image, x-xOffset, y-yOffset-move, null);
+		
+		for(Bullet bullet : bullets) {
+			
+			if(bullet instanceof Arrow) {
+				Arrow arrow = (Arrow)bullet;
+				arrow.draw(graphics);
+			} else {
+				bullet.draw(graphics);
+			}
+		}
 		
 		if(structure != null) {
 			

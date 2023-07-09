@@ -21,7 +21,7 @@ public class Enemy {
 	int delay = 0;
 	boolean start = true;
 	
-	int speed = 5;
+	int speed = 3;
 	double xVec;
 	double yVec;
 	
@@ -97,7 +97,7 @@ public class Enemy {
 				return;
 			}
 			
-			if(!(path[currentField].getX()>path[currentField+1].getX() && path[currentField].getY()>path[currentField+1].getY())) {
+			if(!(path[currentField].getY()>path[currentField+1].getY())) {
 				path[currentField].enemies.remove(this);
 				path[currentField+1].enemies.add(this);
 			}
@@ -135,5 +135,30 @@ public class Enemy {
 	
 	public boolean isDead() {
 		return dead;
+	}
+	
+	public static Enemy getClosestEnemy(int x, int y) {
+		Enemy nearestEnemy = null;
+		double smallestDistance = 1000;
+		
+		for(Enemy enemy : gamePanel.enemies) {
+			double distanceToEnemy = calculateDistanceToEnemy(x, y, enemy);
+			if(distanceToEnemy < smallestDistance) {
+				nearestEnemy = enemy;
+				smallestDistance = distanceToEnemy;
+			}
+		}
+		
+		return nearestEnemy;
+		
+	}
+	
+	public static double calculateDistanceToEnemy(int x, int y, Enemy enemy) {
+		int xVec = (int)enemy.x - x;
+		int yVec = (int)((enemy.y - y)*GamePanel.SCALING_3D_HEIGHT_FACTOR);
+		
+		double distance = Math.sqrt(Math.pow(xVec, 2) + Math.pow(yVec, 2));
+		
+		return distance;
 	}
 }

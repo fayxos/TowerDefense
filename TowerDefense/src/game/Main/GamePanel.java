@@ -68,6 +68,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         Enemy.gamePanel = this;
         
         Enemy.spawnEnemy(EnemyType.GREEN_UFO);
+        /*
         Enemy.spawnEnemy(EnemyType.GREY_UFO, 10);
         Enemy.spawnEnemy(EnemyType.PRUPLE_UFO, 20);
         Enemy.spawnEnemy(EnemyType.RED_UFO, 40);
@@ -83,6 +84,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         Enemy.spawnEnemy(EnemyType.GREY_UFO, 180);
         Enemy.spawnEnemy(EnemyType.PRUPLE_UFO, 220);
         Enemy.spawnEnemy(EnemyType.RED_UFO, 240);
+        */
         
         timer.start();      
     }
@@ -117,6 +119,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     	
     	for(Enemy enemy : enemies) {
         	enemy.move();
+        }
+    	
+    	for(Field[] fields : map.fields) {
+        	for(Field field : fields) {
+        		
+        		if(field instanceof BuildingField) {
+        			BuildingField buildingField = (BuildingField)field;
+        			buildingField.update();
+        		}
+        	}
         }
     	
     	for(int i=0; i<pathFields.length; i++) {
