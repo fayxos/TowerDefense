@@ -52,11 +52,12 @@ public abstract class ActiveBuilding extends Building {
 			if(Enemy.calculateDistanceToEnemy(field.getX(), field.getY(), enemy) > attackRange) return;
 			
 			attackedEnemy = enemy;
-			System.out.println("Ein");
+		}
+		else if(attackedEnemy.isDead()) {
+			attackedEnemy = null;
 		}
 		else if(Enemy.calculateDistanceToEnemy(field.getX(), field.getY(), attackedEnemy) > attackRange) {
 			attackedEnemy = null;
-			System.out.println("Aus");
 		}
 		else {
 			if(attackedEnemy.isDead()) {

@@ -26,7 +26,9 @@ public class Enemy {
 	double yVec;
 	
 	public int lives = 100;
+	public int value = 10;
 	public boolean dead = false;
+	public boolean finished = false;
 	
 	public static final int xOffset = (int)(16*GamePanel.SCALING_FACTOR);
 	public static final int yOffset = (int)(20*GamePanel.SCALING_FACTOR);
@@ -94,7 +96,7 @@ public class Enemy {
 			currentField++;
 			
 			if(currentField == path.length-1) {
-				dead = true;
+				finished = true;
 				return;
 			}
 			
@@ -136,6 +138,10 @@ public class Enemy {
 	
 	public boolean isDead() {
 		return dead;
+	}
+	
+	public boolean isFinished() {
+		return finished;
 	}
 	
 	public static Enemy getClosestEnemy(int x, int y) {
