@@ -155,7 +155,7 @@ public class Enemy {
 	
 	public static double calculateDistanceToEnemy(int x, int y, Enemy enemy) {
 		int xVec = (int)enemy.x - x;
-		int yVec = (int)((enemy.y - y)*GamePanel.SCALING_3D_HEIGHT_FACTOR);
+		int yVec = (int)((enemy.y - y)*GamePanel.SCALING_3D_HEIGHT_FACTOR)*2;
 		
 		double distance = Math.sqrt(Math.pow(xVec, 2) + Math.pow(yVec, 2));
 		
