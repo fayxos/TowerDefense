@@ -13,8 +13,6 @@ import game.Objects.Enemy;
 
 public class ArcherTower extends ActiveBuilding {
 	
-	public Defender defender;
-	
 	public ArcherTower() {
 		super();
 		bottomType = StructureType.GREEN_TOWER_BOTTOM_1;
