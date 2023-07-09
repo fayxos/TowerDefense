@@ -48,18 +48,19 @@ public class ArcherTower extends ActiveBuilding {
 			if(Enemy.calculateDistanceToEnemy(field.getX(), field.getY(), enemy) > attackRange) return;
 			
 			attackedEnemy = enemy;
-			System.out.println("Ein");
+		}
+		else if(attackedEnemy.isDead()) {
+			attackedEnemy = null;
 		}
 		else if(Enemy.calculateDistanceToEnemy(field.getX(), field.getY(), attackedEnemy) > attackRange) {
 			attackedEnemy = null;
-			System.out.println("Aus");
 		}
 		else {
 			
 			if(attackTick % attackSpeed == 0) {
 				
 				Arrow arrow = new Arrow(attackedEnemy, attackDamage);
-				arrow.place(field.getX(), field.getY());
+				arrow.place(field.getX(), field.getY()-80);
 				bullets.add(arrow);
 				field.bullets.add(arrow);	
 				

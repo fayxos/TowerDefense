@@ -63,11 +63,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         
         GameShop.start();
         
-        map = new Map(PANEL_SIZE.width/2, PANEL_SIZE.height/7);
+        map = new Map(PANEL_SIZE.width/2, PANEL_SIZE.height/8);
         
         this.pathFields = new PathField[path.length];
         for(int i = 0; i<path.length; i++) {
-        	this.pathFields[i] = (PathField)this.map.fields[path[i][0]][path[i][1]];
+        	this.pathFields[i] = (PathField)map.fields[path[i][0]][path[i][1]];
         }
         
         Bullet.map = map;
@@ -76,7 +76,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         Enemy.gamePanel = this;
         
         Enemy.spawnEnemy(EnemyType.GREEN_UFO);
-        /*
         Enemy.spawnEnemy(EnemyType.GREY_UFO, 10);
         Enemy.spawnEnemy(EnemyType.PRUPLE_UFO, 20);
         Enemy.spawnEnemy(EnemyType.RED_UFO, 40);
@@ -92,7 +91,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         Enemy.spawnEnemy(EnemyType.GREY_UFO, 180);
         Enemy.spawnEnemy(EnemyType.PRUPLE_UFO, 220);
         Enemy.spawnEnemy(EnemyType.RED_UFO, 240);
-        */
         
         timer.start();      
     }
@@ -142,16 +140,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         }
     	
     	for(int i=0; i<pathFields.length; i++) {
-    		for(int j=0; j<pathFields[i].enemies.size(); j++)
-        	if(pathFields[i].enemies.get(j).isDead()) {
-        		GameState.lives--;
-        		enemies.remove(pathFields[i].enemies.get(j));
-        		pathFields[i].enemies.remove(j);
-        		
-        		if(GameState.lives == 0) {
-        			GameState.gameOver = true;
-        		}
-        	}
+    		for(int j=0; j<pathFields[i].enemies.size(); j++) {
+    			if(pathFields[i].enemies.get(j).isDead()) {
+    				GameState.gold += pathFields[i].enemies.get(j).value;
+    				enemies.remove(pathFields[i].enemies.get(j));
+	        		pathFields[i].enemies.remove(j);
+    			}
+    			else if(pathFields[i].enemies.get(j).isFinished()) {
+	        		GameState.lives--;
+	        		enemies.remove(pathFields[i].enemies.get(j));
+	        		pathFields[i].enemies.remove(j);
+	        		
+	        		if(GameState.lives == 0) {
+	        			GameState.gameOver = true;
+	        		}
+	        	}
+    		}	
         }
     	    	
         repaint();
