@@ -1,6 +1,8 @@
 package game.Objects;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 import game.Main.GamePanel;
 
@@ -19,13 +21,16 @@ public class Arrow extends Bullet {
 	
 	@Override
 	public void draw(Graphics graphics) {	
-		turnImage();
-		
-		super.draw(graphics);
-	}
-	
-	public void turnImage() {
-		
+		AffineTransform trans = new AffineTransform();
+		double vecX = enemy.x-x;		
+		double vecY = enemy.y-y;
+		double hypotenuse = Math.sqrt(Math.pow(vecX, 2) + Math.pow(vecY, 2));
+		double rotation = Math.asin(vecY/hypotenuse);
+		System.out.println(rotation*180/Math.PI);
+		trans.translate((int)x-xOffset,(int)y-yOffset);
+//		if(vecX<0) rotation += Math.PI/2;
+		trans.rotate(rotation);
+		((Graphics2D)graphics).drawImage(image, trans, null);
 	}
 
 }
