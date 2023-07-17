@@ -53,7 +53,7 @@ public abstract class ActiveBuilding extends Building {
 			
 			attackedEnemy = enemy;
 		}
-		else if(attackedEnemy.isDead()) {
+		else if(attackedEnemy.isDead() || attackedEnemy.isFinished()) {
 			attackedEnemy = null;
 		}
 		else if(Enemy.calculateDistanceToEnemy(field.getX(), field.getY(), attackedEnemy) > attackRange) {
