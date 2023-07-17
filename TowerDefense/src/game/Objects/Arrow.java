@@ -28,8 +28,10 @@ public class Arrow extends Bullet {
 		double rotation = Math.asin(vecY/hypotenuse);
 		System.out.println(rotation*180/Math.PI);
 		trans.translate((int)x-xOffset,(int)y-yOffset);
-//		if(vecX<0) rotation += Math.PI/2;
-		trans.rotate(rotation);
+		if(vecX<0) {
+			trans.rotate(Math.PI);
+			trans.rotate(-rotation);
+		} else trans.rotate(rotation);
 		((Graphics2D)graphics).drawImage(image, trans, null);
 	}
 
