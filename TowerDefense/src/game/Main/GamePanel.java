@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -13,6 +14,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -50,6 +53,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     int mouseY = -50;
     
     private Building newBuilding;
+    
+    private boolean stop = false;
 
     public GamePanel() {
         addKeyListener(this);
@@ -58,10 +63,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         setBackground(Color.GREEN);
+        setLayout(null);
                 
         GameState.start();
         
         GameShop.start();
+        
+  	    JButton button = new JButton("Pause");
+        button.setBounds(PANEL_SIZE.width-50, 12, 50, 50);
+        ImageIcon icon = new ImageIcon("java.gif");
+        Image image = icon.getImage();
+        image = image.getScaledInstance(100, 100, Image.SCALE_DEFAULT); 
+        icon = new ImageIcon(image);
+        add(button);
+        
         
         map = new Map(PANEL_SIZE.width/2, PANEL_SIZE.height/8);
         
@@ -121,6 +136,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     // Timer
     public void actionPerformed(ActionEvent e) { 
     	if(GameState.gameOver) {
+    		repaint();
+    		return;
+    	}
+    	
+    	if (stop) {
     		repaint();
     		return;
     	}
