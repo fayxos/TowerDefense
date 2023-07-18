@@ -20,7 +20,8 @@ public class Arrow extends Bullet {
 	}
 	
 	@Override
-	public void draw(Graphics graphics) {	
+	public void draw(Graphics graphics) {
+		if(enemy.isDead()) return;
 		AffineTransform trans = new AffineTransform();
 		double vecX = enemy.x-x;		
 		double vecY = enemy.y-y;
