@@ -55,6 +55,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     private Building newBuilding;
     
     private boolean stop = false;
+    
+    private JButton button;
+    private ImageIcon pauseIcon;
+    private ImageIcon playIcon;
+
 
     public GamePanel() {
         addKeyListener(this);
@@ -69,12 +74,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         
         GameShop.start();
         
-  	    JButton button = new JButton("Pause");
-        button.setBounds(PANEL_SIZE.width-50, 12, 50, 50);
-        ImageIcon icon = new ImageIcon("java.gif");
-        Image image = icon.getImage();
-        image = image.getScaledInstance(100, 100, Image.SCALE_DEFAULT); 
-        icon = new ImageIcon(image);
+        // Pause und Play-Button
+  	    button = new JButton();
+        button.setBounds(PANEL_SIZE.width-70, 20, 70, 55);
+        pauseIcon = new ImageIcon("assets/pause_button.png");
+        playIcon = new ImageIcon("assets/play_button.png");
+        Image image = pauseIcon.getImage();
+        Image image2 = playIcon.getImage();
+        image = image.getScaledInstance(60, 60, Image.SCALE_DEFAULT); 
+        image2 = image2.getScaledInstance(60, 60, Image.SCALE_DEFAULT); 
+        pauseIcon = new ImageIcon(image);
+        playIcon = new ImageIcon(image2);
+        button.addActionListener(this);
+        button.setIcon(pauseIcon);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setContentAreaFilled(false);
         add(button);
         
         
@@ -138,6 +153,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     	if(GameState.gameOver) {
     		repaint();
     		return;
+    	}
+    	
+    	if(e.getSource() == this.button) {
+    		stop = !stop;
+    		if(stop) button.setIcon(playIcon);
+    		else button.setIcon(pauseIcon);
+    		button.setVisible(true);
+
     	}
     	
     	if (stop) {
