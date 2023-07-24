@@ -15,8 +15,19 @@ public class ArcherTower extends ActiveBuilding {
 	
 	public ArcherTower() {
 		super();
-		bottomType = StructureType.GREEN_TOWER_BOTTOM_1;
-		topType = StructureType.GREEN_TOWER_TOP_2;
+		
+		level = 1;
+		maxLevel = 3;
+		
+		bottomType = new StructureType[maxLevel];
+		bottomType[0] = StructureType.GREEN_TOWER_BOTTOM_1;
+		bottomType[1] = StructureType.YELLOW_TOWER_BOTTOM_1;
+		bottomType[2] = StructureType.RED_TOWER_BOTTOM_1;
+		topType = new StructureType[maxLevel];
+		topType[0] = StructureType.GREEN_TOWER_TOP_2;
+		topType[1] = StructureType.YELLOW_TOWER_TOP_2;
+		topType[2] = StructureType.RED_TOWER_TOP_2;
+		
 		spriteYOffset = (int)(26*GamePanel.SCALING_FACTOR);
 		loadStructure();
 		
@@ -29,7 +40,6 @@ public class ArcherTower extends ActiveBuilding {
 	public void draw(Graphics graphics, int x, int y) {
 		super.draw(graphics, x, y);
 		defender.draw(graphics, x, y);
-
 	}
 	
 	public void draw(Graphics graphics, int x, int y, boolean selected) {
@@ -49,7 +59,7 @@ public class ArcherTower extends ActiveBuilding {
 			
 			attackedEnemy = enemy;
 		}
-		else if(attackedEnemy.isDead() || attackedEnemy.isFinished()) {
+		else if(attackedEnemy.isDead()) {
 			attackedEnemy = null;
 		}
 		else if(Enemy.calculateDistanceToEnemy(field.getX(), field.getY(), attackedEnemy) > attackRange) {

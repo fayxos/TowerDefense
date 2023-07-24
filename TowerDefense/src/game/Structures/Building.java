@@ -13,7 +13,7 @@ abstract public class Building extends Structure {
 	
 	int level, maxLevel;
 	
-	StructureType bottomType, topType;
+	StructureType bottomType[], topType[];
 	Image bottomSprite, topSprite;
 	int xOffsetBottom, yOffsetBottom, 
 		xOffsetTop, yOffsetTop,
@@ -27,16 +27,21 @@ abstract public class Building extends Structure {
 		return level < maxLevel;
 	}
 	
+	public void upgrade() {
+		level++;
+		loadStructure();
+	}
+	
 	@Override
 	protected void loadStructure() {
-		xOffsetBottom = (int)(bottomType.width*GamePanel.SCALING_FACTOR)/2;
-		yOffsetBottom = (int)(bottomType.yOffset*GamePanel.SCALING_FACTOR);
-		loadImageBottom(bottomType.path, (int)(bottomType.width*GamePanel.SCALING_FACTOR), (int)(bottomType.height*GamePanel.SCALING_FACTOR));
+		xOffsetBottom = (int)(bottomType[level-1].width*GamePanel.SCALING_FACTOR)/2;
+		yOffsetBottom = (int)(bottomType[level-1].yOffset*GamePanel.SCALING_FACTOR);
+		loadImageBottom(bottomType[level-1].path, (int)(bottomType[level-1].width*GamePanel.SCALING_FACTOR), (int)(bottomType[level-1].height*GamePanel.SCALING_FACTOR));
 		
 		if(topType!=null) {
-			xOffsetTop = (int)(topType.width*GamePanel.SCALING_FACTOR)/2;
-			yOffsetTop = (int)(topType.yOffset*GamePanel.SCALING_FACTOR);	
-			loadImageTop(topType.path, (int)(topType.width*GamePanel.SCALING_FACTOR), (int)(topType.height*GamePanel.SCALING_FACTOR));
+			xOffsetTop = (int)(topType[level-1].width*GamePanel.SCALING_FACTOR)/2;
+			yOffsetTop = (int)(topType[level-1].yOffset*GamePanel.SCALING_FACTOR);	
+			loadImageTop(topType[level-1].path, (int)(topType[level-1].width*GamePanel.SCALING_FACTOR), (int)(topType[level-1].height*GamePanel.SCALING_FACTOR));
 		}
 	}
 	
