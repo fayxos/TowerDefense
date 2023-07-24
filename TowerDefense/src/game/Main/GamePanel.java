@@ -60,6 +60,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     private ImageIcon pauseIcon;
     private ImageIcon playIcon;
 
+    private JButton actionButton;
 
     public GamePanel() {
         addKeyListener(this);
@@ -91,7 +92,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
         button.setFocusPainted(false);
         button.setContentAreaFilled(false);
         add(button);
-        
+
+	actionButton = new JButton("Action");
+        actionButton.addActionListener(this);
+        add(actionButton);
         
         map = new Map(PANEL_SIZE.width/2, PANEL_SIZE.height/8);
         
@@ -166,6 +170,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
     	if (stop) {
     		repaint();
     		return;
+    	}
+
+    	if(e.getSource() == actionButton) {
+    		System.out.println("Pressed");
+    		if(Field.SelectedField.performAction()) {
+    			Field.SelectedField = null;
+    			actionButton.setVisible(false);
+    		};
     	}
     	
     	for(Enemy enemy : enemies) {
@@ -269,23 +281,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
     
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		Field selectedField = map.getFieldFromPosition(e.getX(), e.getY());
-    	if(selectedField instanceof BuildingField) {
-    		BuildingField field = (BuildingField) selectedField;
-    		if(field.hasStructure()) {
-    			Structure structure = field.getStructure();
-    			if(structure instanceof Obstacle) {
-    				
-    			} else if(structure instanceof Building) {
-    				
-    			}
-    		}
-    	}
-	}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
-	public void mousePressed(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {
+		if(Field.HighlightedField instanceof BuildingField) {
+			Field.SelectedField = (BuildingField)Field.HighlightedField;
+			if(Field.SelectedField.configureActionButton(actionButton)) actionButton.setVisible(true);
+		} 
+		
+		if(map.getFieldFromPosition(e.getX(), e.getY()) == null) {
+			actionButton.setVisible(false);
+			Field.SelectedField = null;
+		}
+	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {}
