@@ -11,6 +11,7 @@ import game.Objects.Enemy;
 public abstract class Field {
 	private static int IDCounter = 0;
 	public static Field HighlightedField = null;
+	public static BuildingField SelectedField = null;
 	public int ID;
 	int x;
 	int y;
