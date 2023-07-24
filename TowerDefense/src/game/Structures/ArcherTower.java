@@ -18,6 +18,11 @@ public class ArcherTower extends ActiveBuilding {
 		
 		level = 1;
 		maxLevel = 3;
+
+		upgradeCost = new int[3];
+		upgradeCost[0] = 50;
+		upgradeCost[1] = 100;
+		upgradeCost[2] = 150;
 		
 		bottomType = new StructureType[maxLevel];
 		bottomType[0] = StructureType.GREEN_TOWER_BOTTOM_1;
