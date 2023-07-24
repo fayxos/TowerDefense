@@ -25,6 +25,14 @@ public abstract class ActiveBuilding extends Building {
 		super();
 	}
 	
+	protected abstract void assignStats();
+	
+	@Override
+	public void upgrade() {
+		super.upgrade();
+		assignStats();
+	}
+	
 	@Override
 	public void draw(Graphics graphics, int x, int y) {
 		this.draw(graphics, x, y, false);
@@ -53,7 +61,7 @@ public abstract class ActiveBuilding extends Building {
 			
 			attackedEnemy = enemy;
 		}
-		else if(attackedEnemy.isDead() || attackedEnemy.isFinished()) {
+		else if(attackedEnemy.isDead()) {
 			attackedEnemy = null;
 		}
 		else if(Enemy.calculateDistanceToEnemy(field.getX(), field.getY(), attackedEnemy) > attackRange) {

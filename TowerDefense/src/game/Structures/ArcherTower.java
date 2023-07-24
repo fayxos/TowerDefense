@@ -30,11 +30,30 @@ public class ArcherTower extends ActiveBuilding {
 		
 		spriteYOffset = (int)(26*GamePanel.SCALING_FACTOR);
 		loadStructure();
+		assignStats();
 		
-		attackRange = 250;
-		attackSpeed = 20;
-		attackDamage = 20;
 		defender = new Defender(DefenderType.ARCHER);
+	}
+	
+	@Override
+	protected void assignStats() {
+		switch (level) {
+		case 1:
+			attackRange = 250;
+			attackSpeed = 20;
+			attackDamage = 20;
+			break;
+		case 2:
+			attackRange = 300;
+			attackSpeed = 18;
+			attackDamage = 22;
+			break;
+		case 3:
+			attackRange = 350;
+			attackSpeed = 16;
+			attackDamage = 24;
+			break;
+		}
 	}
 	
 	public void draw(Graphics graphics, int x, int y) {
