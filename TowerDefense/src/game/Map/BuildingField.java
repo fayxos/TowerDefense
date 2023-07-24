@@ -118,7 +118,9 @@ public class BuildingField extends Field {
 				return false;
 			}
 			
-			button.setText("Upgrade " + building.upgradeCost[building.level] + " Gold");
+			if(building.upgradeCost == null) return false;
+			
+			button.setText("Upgrade " + building.upgradeCost[building.level+1] + " Gold");
 			button.setBounds(x+20, y-150, 160, 40);
 			
 			return true;
